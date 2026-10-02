@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yohannes Gizachew — CV</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── Reset ───────────────────────────────────── */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    /* ── Design tokens ───────────────────────────── */
+    :root {
+      --cyan:    #0284c7;
+      --violet:  #7c3aed;
+      --dark:    #0f172a;
+      --mid:     #334155;
+      --muted:   #64748b;
+      --light:   #f8fafc;
+      --border:  #e2e8f0;
+      --white:   #ffffff;
+      --font:    'Inter', sans-serif;
+      --heading: 'Space Grotesk', sans-serif;
+    }
+
+    /* ── Base ────────────────────────────────────── */
+    html { font-size: 14px; }
+    body {
+      font-family: var(--font);
+      color: var(--dark);
+      background: var(--white);
+      line-height: 1.6;
+    }
+
+    /* ── Print button (hidden on print) ─────────── */
+    .print-bar {
+      background: #0f172a;
+      color: #e2e8f0;
+      text-align: center;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      font-family: var(--font);
+      font-size: 13px;
+    }
+    .print-bar button {
+      background: #0284c7;
+      color: #fff;
+      border: none;
+      padding: 8px 20px;
+      border-radius: 6px;
+      font-family: var(--font);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .print-bar button:hover { background: #0369a1; }
+
+    /* ── CV wrapper ──────────────────────────────── */
+    .cv {
+      max-width: 800px;
+      margin: 24px auto;
+      background: var(--white);
+      box-shadow: 0 4px 40px rgba(0,0,0,0.12);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    /* ── Header ──────────────────────────────────── */
+    .header {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 60%, #0f2744 100%);
+      padding: 40px 48px 36px;
+      position: relative;
+      overflow: hidden;
+    }
+    .header::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 220px; height: 220px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(2,132,199,0.25) 0%, transparent 70%);
+    }
+    .header::after {
+      content: '';
+      position: absolute;
+      bottom: -40px; left: 30%;
+      width: 160px; height: 160px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(124,58,237,0.2) 0%, transparent 70%);
+    }
+
+    .header-content { position: relative; z-index: 1; }
+
+    .name {
+      font-family: var(--heading);
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #f8fafc;
+      letter-spacing: -0.5px;
+      margin-bottom: 4px;
+    }
+    .name span { color: #38bdf8; }
+
+    .roles {
+      font-size: 0.95rem;
+      color: #94a3b8;
+      margin-bottom: 20px;
+      letter-spacing: 0.5px;
+    }
+    .roles span {
+      color: #38bdf8;
+      font-weight: 600;
+    }
+    .roles .sep { margin: 0 8px; color: #475569; }
+
+    .contact-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 20px;
+    }
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #cbd5e1;
+      font-size: 0.8rem;
+      text-decoration: none;
+    }
+    .contact-item svg { opacity: 0.7; }
+
+    /* ── Main layout ─────────────────────────────── */
+    .main {
+      display: grid;
+      grid-template-columns: 1fr 2.2fr;
+    }
+
+    /* ── Sidebar ─────────────────────────────────── */
+    .sidebar {
+      background: #f8fafc;
+      padding: 32px 24px;
+      border-right: 1px solid var(--border);
+    }
+
+    /* ── Content ─────────────────────────────────── */
+    .content {
+      padding: 32px 36px;
+    }
+
+    /* ── Section ─────────────────────────────────── */
+    .section { margin-bottom: 28px; }
+    .section:last-child { margin-bottom: 0; }
+
+    .section-title {
+      font-family: var(--heading);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, var(--cyan), transparent);
+      opacity: 0.3;
+    }
+
+    /* ── About / Profile ─────────────────────────── */
+    .profile-text {
+      font-size: 0.83rem;
+      color: var(--mid);
+      line-height: 1.75;
+    }
+
+    /* ── Skills ──────────────────────────────────── */
+    .skill-group { margin-bottom: 16px; }
+    .skill-group-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 7px;
+    }
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+    .skill-tag {
+      padding: 3px 9px;
+      background: #e0f2fe;
+      color: var(--cyan);
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      border: 1px solid #bae6fd;
+    }
+    .skill-tag.violet {
+      background: #ede9fe;
+      color: var(--violet);
+      border-color: #ddd6fe;
+    }
+    .skill-tag.pink {
+      background: #fce7f3;
+      color: #be185d;
+      border-color: #fbcfe8;
+    }
+
+    /* ── Professional skills ─────────────────────── */
+    .pro-skill {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 0.78rem;
+      color: var(--mid);
+      padding: 4px 0;
+      border-bottom: 1px dashed var(--border);
+    }
+    .pro-skill:last-child { border-bottom: none; }
+    .pro-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--cyan);
+      flex-shrink: 0;
+    }
+
+    /* ── Entry (experience / education) ─────────── */
+    .entry { margin-bottom: 20px; }
+    .entry:last-child { margin-bottom: 0; }
+
+    .entry-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 8px;
+      margin-bottom: 2px;
+    }
+    .entry-title {
+      font-family: var(--heading);
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--dark);
+    }
+    .entry-period {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--cyan);
+      background: #e0f2fe;
+      padding: 2px 8px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+    .entry-sub {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--cyan);
+      margin-bottom: 6px;
+    }
+    .entry-desc {
+      font-size: 0.8rem;
+      color: var(--mid);
+      line-height: 1.7;
+      margin-bottom: 8px;
+    }
+    .entry-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+    .entry-tag {
+      font-size: 0.7rem;
+      padding: 2px 7px;
+      background: #f1f5f9;
+      color: var(--muted);
+      border-radius: 3px;
+      border: 1px solid var(--border);
+    }
+
+    /* ── Project card ────────────────────────────── */
+    .project {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--cyan);
+      border-radius: 6px;
+      padding: 14px 16px;
+      margin-bottom: 12px;
+    }
+    .project:last-child { margin-bottom: 0; }
+    .project-title {
+      font-family: var(--heading);
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 4px;
+    }
+    .project-desc {
+      font-size: 0.79rem;
+      color: var(--mid);
+      line-height: 1.65;
+      margin-bottom: 8px;
+    }
+
+    /* ── Availability banner ─────────────────────── */
+    .availability {
+      background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+      border: 1px solid #6ee7b7;
+      border-radius: 6px;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #065f46;
+      margin-bottom: 20px;
+    }
+    .avail-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 0 3px rgba(16,185,129,0.2);
+    }
+
+    /* ── Print ───────────────────────────────────── */
+    @media print {
+      @page { margin: 0; size: A4; }
+      .print-bar { display: none !important; }
+      html { font-size: 12px; }
+      body { background: white; }
+      .cv {
+        max-width: 100%;
+        margin: 0;
+        box-shadow: none;
+        border-radius: 0;
+      }
+      .header { padding: 28px 36px 24px; }
+      .sidebar { padding: 24px 18px; }
+      .content { padding: 24px 28px; }
+      a { color: inherit !important; text-decoration: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Print bar (hidden on print) -->
+  <div class="print-bar">
+    <span>📄 To save as PDF: click the button or press <strong>Ctrl+P</strong> → "Save as PDF"</span>
+    <button onclick="window.print()">🖨 Save / Print PDF</button>
+  </div>
+
+  <div class="cv">
+
+    <!-- ── HEADER ───────────────────────────────── -->
+    <div class="header">
+      <div class="header-content" style="display:flex; align-items:center; gap:28px;">
+        <!-- Photo -->
+        <img
+          src="/assets/photo.jpg"
+          alt="Yohannes Gizachew"
+          style="width:100px; height:100px; border-radius:50%; object-fit:cover; object-position:top center; border:3px solid rgba(56,189,248,0.5); flex-shrink:0;"
+        />
+        <!-- Info -->
+        <div>
+        <div class="name">Yohannes <span>Gizachew</span></div>
+        <div class="roles">
+          <span>Full-Stack Developer</span>
+          <span class="sep">·</span>
+          Backend Developer
+          <span class="sep">·</span>
+          UI/UX Designer
+        </div>
+        <div class="contact-row">
+          <a class="contact-item" href="mailto:yohannesgizchew11@gmail.com">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            yohannesgizchew11@gmail.com
+          </a>
+          <a class="contact-item" href="tel:+251978253859">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.15 13.5a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.06 2.83h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 10.2a16 16 0 0 0 6.29 6.29l1.42-1.42a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.5 17.4l.42-.48z"/></svg>
+            +251 978 253 859
+          </a>
+          <a class="contact-item" href="#">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+            Addis Ababa, Ethiopia
+          </a>
+          <a class="contact-item" href="https://github.com/JohnPaz12" target="_blank">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.2c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+            github.com/JohnPaz12
+          </a>
+          <a class="contact-item" href="https://www.linkedin.com/in/yohannes-gizachew-155283297" target="_blank">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            linkedin.com/in/yohannes-gizachew-155283297
+          </a>
+        </div>
+        </div><!-- /info -->
+      </div><!-- /header-content -->
+    </div><!-- /header -->
+
+    <!-- ── MAIN ──────────────────────────────────── -->
+    <div class="main">
+
+      <!-- ── SIDEBAR ─────────────────────────────── -->
+      <div class="sidebar">
+
+        <!-- Availability -->
+        <div class="availability">
+          <div class="avail-dot"></div>
+          Available for hire
+        </div>
+
+        <!-- Technical Skills -->
+        <div class="section">
+          <div class="section-title">Technical Skills</div>
+
+          <div class="skill-group">
+            <div class="skill-group-label">Frontend</div>
+            <div class="skill-tags">
+              <span class="skill-tag">React</span>
+              <span class="skill-tag">Next.js</span>
+              <span class="skill-tag">JavaScript</span>
+              <span class="skill-tag">HTML5</span>
+              <span class="skill-tag">CSS3</span>
+              <span class="skill-tag">Tailwind CSS</span>
+            </div>
+          </div>
+
+          <div class="skill-group">
+            <div class="skill-group-label">Backend</div>
+            <div class="skill-tags">
+              <span class="skill-tag violet">Node.js</span>
+              <span class="skill-tag violet">Express</span>
+              <span class="skill-tag violet">MongoDB</span>
+              <span class="skill-tag violet">PostgreSQL</span>
+              <span class="skill-tag violet">Firebase</span>
+              <span class="skill-tag violet">REST APIs</span>
+            </div>
+          </div>
+
+          <div class="skill-group">
+            <div class="skill-group-label">Tools &amp; Design</div>
+            <div class="skill-tags">
+              <span class="skill-tag pink">Figma</span>
+              <span class="skill-tag pink">Git</span>
+              <span class="skill-tag pink">GitHub</span>
+              <span class="skill-tag pink">VS Code</span>
+              <span class="skill-tag pink">Vite</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Professional Skills -->
+        <div class="section">
+          <div class="section-title">Professional Skills</div>
+          <div class="pro-skill"><div class="pro-dot"></div> Problem Solving</div>
+          <div class="pro-skill"><div class="pro-dot"></div> Team Collaboration</div>
+          <div class="pro-skill"><div class="pro-dot"></div> Communication</div>
+          <div class="pro-skill"><div class="pro-dot"></div> UI/UX Thinking</div>
+          <div class="pro-skill"><div class="pro-dot"></div> Agile / Scrum</div>
+          <div class="pro-skill"><div class="pro-dot"></div> Code Review</div>
+          <div class="pro-skill"><div class="pro-dot"></div> Fast Learner</div>
+          <div class="pro-skill"><div class="pro-dot"></div> Time Management</div>
+          <div class="pro-skill"><div class="pro-dot"></div> Project Management</div>
+          <div class="pro-skill"><div class="pro-dot"></div> Technical Writing</div>
+        </div>
+
+        <!-- Languages -->
+        <div class="section">
+          <div class="section-title">Languages</div>
+          <div class="pro-skill"><div class="pro-dot"></div> Amharic — Native</div>
+          <div class="pro-skill"><div class="pro-dot"></div> English — Fluent</div>
+        </div>
+
+      </div>
+
+      <!-- ── CONTENT ──────────────────────────────── -->
+      <div class="content">
+
+        <!-- Profile -->
+        <div class="section">
+          <div class="section-title">Profile</div>
+          <p class="profile-text">
+            I'm a 4th-year Computer Science student at Unity University in Addis Ababa,
+            passionate about full-stack development, UI/UX design, and mobile applications.
+            I enjoy turning ideas into real products — learning by building, refining interfaces,
+            and writing code that is clear and maintainable. Currently focused on MERN stack
+            projects and growing as a developer ready for internships and collaborative work.
+          </p>
+        </div>
+
+        <!-- Experience -->
+        <div class="section">
+          <div class="section-title">Experience</div>
+
+          <div class="entry">
+            <div class="entry-header">
+              <div class="entry-title">Computer Science Student — 4th Year</div>
+              <div class="entry-period">2022 – Present</div>
+            </div>
+            <div class="entry-sub">Unity University · Addis Ababa, Ethiopia</div>
+            <p class="entry-desc">
+              Studying computer science with a focus on software development, data structures,
+              and building real-world projects. Actively learning full-stack web development (MERN),
+              UI/UX design, and mobile app fundamentals through coursework and personal builds.
+              Developing hands-on experience designing and implementing responsive web applications
+              and REST API services.
+            </p>
+            <div class="entry-tags">
+              <span class="entry-tag">MERN Stack</span>
+              <span class="entry-tag">React</span>
+              <span class="entry-tag">Node.js</span>
+              <span class="entry-tag">UI/UX</span>
+              <span class="entry-tag">Mobile Dev</span>
+              <span class="entry-tag">Data Structures</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Education -->
+        <div class="section">
+          <div class="section-title">Education</div>
+
+          <div class="entry">
+            <div class="entry-header">
+              <div class="entry-title">BSc in Computer Science</div>
+              <div class="entry-period">2022 – Present</div>
+            </div>
+            <div class="entry-sub">Unity University · Addis Ababa, Ethiopia · 4th Year</div>
+            <p class="entry-desc">
+              Pursuing a Bachelor of Science in Computer Science with growing specialization
+              in full-stack development, software engineering, and user-centered design.
+              Coursework covers algorithms, databases, software architecture, and web technologies.
+            </p>
+          </div>
+        </div>
+
+        <!-- Projects -->
+        <div class="section">
+          <div class="section-title">Projects</div>
+
+          <div class="project">
+            <div class="project-title">📚 Wisdom Book Shop</div>
+            <p class="project-desc">
+              A full-stack book shop web application for browsing and managing inventory,
+              built with the MERN stack. Features include product listing, search, and a
+              clean responsive UI with a focus on maintainable architecture.
+            </p>
+            <div class="entry-tags">
+              <span class="entry-tag">React</span>
+              <span class="entry-tag">Node.js</span>
+              <span class="entry-tag">Express</span>
+              <span class="entry-tag">MongoDB</span>
+              <span class="entry-tag">MERN Stack</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Services / What I Offer -->
+        <div class="section">
+          <div class="section-title">What I Offer</div>
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 6px;">
+            <div style="display:flex; align-items:center; gap:6px; font-size:0.78rem; color:var(--mid); padding:5px 0;">
+              <span style="color:var(--cyan);">✓</span> Web Development
+            </div>
+            <div style="display:flex; align-items:center; gap:6px; font-size:0.78rem; color:var(--mid); padding:5px 0;">
+              <span style="color:var(--cyan);">✓</span> Backend Development
+            </div>
+            <div style="display:flex; align-items:center; gap:6px; font-size:0.78rem; color:var(--mid); padding:5px 0;">
+              <span style="color:var(--cyan);">✓</span> UI/UX Design
+            </div>
+            <div style="display:flex; align-items:center; gap:6px; font-size:0.78rem; color:var(--mid); padding:5px 0;">
+              <span style="color:var(--cyan);">✓</span> Mobile Development
+            </div>
+            <div style="display:flex; align-items:center; gap:6px; font-size:0.78rem; color:var(--mid); padding:5px 0;">
+              <span style="color:var(--cyan);">✓</span> Database Design
+            </div>
+            <div style="display:flex; align-items:center; gap:6px; font-size:0.78rem; color:var(--mid); padding:5px 0;">
+              <span style="color:var(--cyan);">✓</span> REST API Development
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /content -->
+    </div><!-- /main -->
+  </div><!-- /cv -->
+
+</body>
+</html>
